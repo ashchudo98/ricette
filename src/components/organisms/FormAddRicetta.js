@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Form, Card, Button, Modal } from "react-bootstrap";
-//import { db, collection, addDoc } from "@/firebase";
+import { db, collection, addDoc } from "@/firebase";
 
 export default function FormAddRicetta() {
   const [recipeName, setRecipeName] = useState('');
@@ -66,7 +66,7 @@ export default function FormAddRicetta() {
       createdAt: new Date() 
     };
 
-    /*try {
+    try {
       const docRef = await addDoc(collection(db, "ricette"), ricetta);
       console.log("Ricetta aggiunta con ID: ", docRef.id);
       alert("Ricetta salvata con successo!");
@@ -74,7 +74,7 @@ export default function FormAddRicetta() {
     } catch (error) {
       console.error("Errore aggiungendo il documento: ", error);
       alert("Si è verificato un errore durante il salvataggio della ricetta.");
-    }*/
+    }
   }
 
   return (
