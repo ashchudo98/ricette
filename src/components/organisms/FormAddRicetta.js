@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { Form, Card, Button, Modal } from "react-bootstrap";
-import { db } from "@/firebase";
-import { collection, doc, setDoc } from 'firebase/firestore';  // Importa le funzioni giuste
+import { db} from "@/firebase";
+import { collection, addDoc } from "firebase/firestore";
+
 
 
 export default function FormAddRicetta() {
@@ -69,8 +70,8 @@ export default function FormAddRicetta() {
     };
 
     try {
-      const docRef = doc(collection(db, "ricette")); 
-      await setDoc(docRef, ricetta);
+      const docRef = await addDoc(collection(db, "ricette"), ricetta);
+      console.log("Ricetta aggiunta con ID: ", docRef.id);
       alert("Ricetta salvata con successo!");
       handleClearAll(); 
     } catch (error) {
