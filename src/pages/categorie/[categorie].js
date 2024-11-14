@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import NavBar from '@/components/organisms/NavBar';
 import FormAddRicetta from '@/components/organisms/FormAddRicetta';
@@ -22,8 +22,7 @@ const fetchData = async (params) => {
 export async function getServerSideProps(context) {
   const { params } = context;
   const data = await fetchData(params);
-  // Pass data to the page via props
-  return { props: { data, text:'pippo' } }
+  return { props: { data } }
 }
 
 export default function Page({ data }) {
@@ -64,7 +63,6 @@ export default function Page({ data }) {
             </div>
           )}
         </div>
-      
     </div>
   );
 }
