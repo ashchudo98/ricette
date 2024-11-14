@@ -1,30 +1,27 @@
-import NavBar from "@/components/organisms/NavBar"
+import NavBar from "@/components/organisms/NavBar";
 import { collection, getDocs } from "firebase/firestore";
-import { db } from '@/firebase';
+import { db } from "@/firebase";
 import { Card } from "react-bootstrap";
+import Link from "next/link";
 
-// Fetch data from Firestore
 const fetchData = async () => {
-  const querySnapshot = await getDocs(collection(db, 'ricette'));  // Get all documents in the 'ricette' collection
+  const querySnapshot = await getDocs(collection(db, "ricette"));
   const ricetteData = querySnapshot.docs.map((doc) => ({
-    id: doc.id,  // Ensure each document has a unique ID
     nome: doc.data().nome,
     tempoPreparazione: doc.data().tempoPreparazione,
     unitaTempo: doc.data().unitaTempo,
     descrizione: doc.data().descrizione,
-    categoria: doc.data().categoria
+    categoria: doc.data().categoria,
   }));
 
-  return ricetteData;  
+  return ricetteData;
 };
 
-// Server-side props
 export async function getServerSideProps() {
-  const data = await fetchData();  // No need for params
+  const data = await fetchData();
   return { props: { data } };
 }
 
-// Main component
 export default function Home({ data }) {
   const ricette = data;
 
@@ -38,12 +35,21 @@ export default function Home({ data }) {
         ) : (
           <div>
             {ricette.map((ricetta) => (
-              <Card key={ricetta.id} style={{ width: '50rem' }} className="mx-auto mt-3">  
-                <Card.Body>
+              <Card
+                key={ricetta.id}
+                style={{ width: "50rem" }}
+                className="mx-auto mt-3"
+              >
+                <Card.Body
+                  as={Link}
+                  href={`/ricette/${ricetta.nome}`}
+                  style={{ textDecoration: "none" }}
+                >
                   <Card.Title>{ricetta.nome}</Card.Title>
                   <Card.Subtitle>
-                    {ricetta.categoria} | {ricetta.tempoPreparazione} {ricetta.unitaTempo}
-                  </Card.Subtitle> 
+                    {ricetta.categoria} | {ricetta.tempoPreparazione}{" "}
+                    {ricetta.unitaTempo}
+                  </Card.Subtitle>
                   <Card.Text>{ricetta.descrizione}</Card.Text>
                 </Card.Body>
               </Card>
@@ -52,5 +58,5 @@ export default function Home({ data }) {
         )}
       </div>
     </div>
-  )
+  );
 }

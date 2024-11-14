@@ -5,6 +5,7 @@ import FormAddRicetta from '@/components/organisms/FormAddRicetta';
 import { collection, getDocs, query, where } from 'firebase/firestore';
 import { db } from '@/firebase';
 import { Card } from 'react-bootstrap';
+import Link from 'next/link';
 
 const fetchData = async (params) => {
   const q = query(collection(db, 'ricette'), where('categoria', '==', params.categorie));
@@ -56,7 +57,9 @@ export default function Page({ data }) {
           <div>
             {ricette.map((ricetta) => (
               <Card key={ricetta.id} style={{ width: '50rem' }} className="mx-auto mt-3">  
-                <Card.Body>
+                <Card.Body as={Link}
+                  href={`/ricette/${ricetta.nome}`}
+                  style={{ textDecoration: "none" }}>
                   <Card.Title>{ricetta.nome}</Card.Title>
                   <Card.Subtitle>{ricetta.tempoPreparazione} {ricetta.unitaTempo}
                   </Card.Subtitle> 
@@ -69,26 +72,4 @@ export default function Page({ data }) {
       </div>
     </div>
   )
-
-  /*return (
-    <div>
-      <NavBar />
-      <h1>{router.query.categorie}</h1>
-        <div>
-          {ricette.length === 0 ? (
-            <p>Nessuna ricetta trovata per questa categoria.</p>
-          ) : (
-            <div>
-              {ricette.map((ricetta) => (
-                <div key={ricetta.id}>
-                  <h3>{ricetta.nome}</h3>
-                  <h6>{ricetta.tempoPreparazione} {ricetta.unitaTempo}</h6>
-                  <p>{ricetta.descrizione}</p>
-                </div>
-              ))}
-            </div>
-          )}
-        </div>
-    </div>
-  );*/
 }
