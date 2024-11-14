@@ -2,6 +2,7 @@ import { useRouter } from "next/router";
 import NavBar from "@/components/organisms/NavBar";
 import { collection, getDocs, query, where } from "firebase/firestore";
 import { db } from "@/firebase";
+import { Accordion } from "react-bootstrap";
 
 const fetchData = async (params) => {
   const q = query(
@@ -11,7 +12,6 @@ const fetchData = async (params) => {
   const querySnapshot = await getDocs(q);
 
   const ricetteData = querySnapshot.docs.map((doc) => ({
-    nome: doc.data().nome,
     tempoPreparazione: doc.data().tempoPreparazione,
     unitaTempo: doc.data().unitaTempo,
     descrizione: doc.data().descrizione,
@@ -34,24 +34,34 @@ export default function Page({ data }) {
   const ricetta = data;
 
   return (
-    <div>
+    <>
       <NavBar />
-      <h1 className="ms-5 mb-5">{router.query.ricette}</h1>
-
-      <div>
-        {ricetta.map((recipe) => (
-          <div key={recipe.id}>
-            <h3>{recipe.nome}</h3>
-            <h6>
-              {recipe.tempoPreparazione} {ricetta.unitaTempo}
-            </h6>
-            <p>{recipe.descrizione}</p>
-            <p>{recipe.categoria}</p>
-            <p>{recipe.ingredienti}</p>
-            <p>{recipe.preparazione}</p>
-          </div>
-        ))}
+      <div className="container mt-5">
+        <h1>{router.query.ricette}</h1>
+        <div>
+          {ricetta.map((recipe) => (
+            <div key={recipe.id}>
+              <ul
+                style={{
+                  columnCount: 2,
+                }}
+              >
+                {recipe.ingredienti.map((ingredient, index) => (
+                  <li key={index}>{ingredient}</li>
+                ))}
+              </ul>
+              <Accordion>
+                {recipe.preparazione.map((step, index) => (
+                  <Accordion.Item eventKey={String(index)} key={index}>
+                    <Accordion.Header>Step #{index + 1}</Accordion.Header>
+                    <Accordion.Body>{step}</Accordion.Body>
+                  </Accordion.Item>
+                ))}
+              </Accordion>
+            </div>
+          ))}
+        </div>
       </div>
-    </div>
+    </>
   );
 }

@@ -1,33 +1,31 @@
 import { useState } from "react";
 import { Form, Card, Button, Modal } from "react-bootstrap";
-import { db} from "@/firebase";
+import { db } from "@/firebase";
 import { collection, addDoc } from "firebase/firestore";
 
-
-
 export default function FormAddRicetta() {
-  const [recipeName, setRecipeName] = useState('');
-  const [preparationTime, setPreparationTime] = useState('');
-  const [selectedTimeUnit, setSelectedTimeUnit] = useState('');
-  const [description, setDescription] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState('');
+  const [recipeName, setRecipeName] = useState("");
+  const [preparationTime, setPreparationTime] = useState("");
+  const [selectedTimeUnit, setSelectedTimeUnit] = useState("");
+  const [description, setDescription] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("");
   const [ingredients, setIngredients] = useState([]);
-  const [newIngredient, setNewIngredient] = useState('');
+  const [newIngredient, setNewIngredient] = useState("");
   const [steps, setSteps] = useState([]);
-  const [newStep, setNewStep] = useState('');
+  const [newStep, setNewStep] = useState("");
   const [show, setShow] = useState(false);
-  
+
   const handleAddIngredient = () => {
-    if (newIngredient.trim() !== '') {
+    if (newIngredient.trim() !== "") {
       setIngredients([...ingredients, newIngredient]);
-      setNewIngredient('');
+      setNewIngredient("");
     }
   };
 
   const handleAddStep = () => {
-    if (newStep.trim() !== '') {
+    if (newStep.trim() !== "") {
       setSteps([...steps, newStep]);
-      setNewStep('');
+      setNewStep("");
     }
   };
 
@@ -45,15 +43,15 @@ export default function FormAddRicetta() {
   const handleShow = () => setShow(true);
 
   const handleClearAll = () => {
-    setIngredients([]);      
-    setNewIngredient('');     
-    setSteps([]);             
-    setNewStep('');           
-    setRecipeName('');        
-    setPreparationTime('');   
-    setDescription('');       
-    setSelectedCategory('');  
-    setSelectedTimeUnit('');  
+    setIngredients([]);
+    setNewIngredient("");
+    setSteps([]);
+    setNewStep("");
+    setRecipeName("");
+    setPreparationTime("");
+    setDescription("");
+    setSelectedCategory("");
+    setSelectedTimeUnit("");
     handleClose();
   };
 
@@ -66,22 +64,22 @@ export default function FormAddRicetta() {
       categoria: selectedCategory,
       ingredienti: ingredients,
       preparazione: steps,
-      createdAt: new Date() 
+      createdAt: new Date(),
     };
 
     try {
       const docRef = await addDoc(collection(db, "ricette"), ricetta);
       console.log("Ricetta aggiunta con ID: ", docRef.id);
       alert("Ricetta salvata con successo!");
-      handleClearAll(); 
+      handleClearAll();
     } catch (error) {
       alert("Si è verificato un errore durante il salvataggio della ricetta.");
     }
-  }
+  };
 
   return (
     <div className="container mt-5 mb-5">
-      <Card style={{ width: '100%' }}>
+      <Card style={{ width: "100%" }}>
         <Card.Body>
           <Form>
             {/* Nome ricetta */}
@@ -101,9 +99,9 @@ export default function FormAddRicetta() {
               <div className="d-flex align-items-center">
                 <Form.Control
                   type="number"
-                  style={{ width: '100px', marginRight: '10px' }} 
+                  style={{ width: "100px", marginRight: "10px" }}
                   value={preparationTime}
-                  onChange={(e) => setPreparationTime(e.target.value)} 
+                  onChange={(e) => setPreparationTime(e.target.value)}
                   aria-label="Tempo di preparazione"
                 />
                 <div className="d-flex">
@@ -113,8 +111,8 @@ export default function FormAddRicetta() {
                     name="tempoPreparazioneUnit"
                     type="radio"
                     value="minuti"
-                    checked={selectedTimeUnit === 'minuti'} 
-                    onChange={(e) => setSelectedTimeUnit(e.target.value)} 
+                    checked={selectedTimeUnit === "minuti"}
+                    onChange={(e) => setSelectedTimeUnit(e.target.value)}
                   />
                   <Form.Check
                     inline
@@ -122,7 +120,7 @@ export default function FormAddRicetta() {
                     name="tempoPreparazioneUnit"
                     type="radio"
                     value="ore"
-                    checked={selectedTimeUnit === 'ore'}
+                    checked={selectedTimeUnit === "ore"}
                     onChange={(e) => setSelectedTimeUnit(e.target.value)}
                   />
                 </div>
@@ -136,7 +134,7 @@ export default function FormAddRicetta() {
                 as="textarea"
                 rows={5}
                 value={description}
-                onChange={(e) => setDescription(e.target.value)} 
+                onChange={(e) => setDescription(e.target.value)}
                 aria-label="Descrizione della ricetta"
               />
             </Form.Group>
@@ -151,8 +149,8 @@ export default function FormAddRicetta() {
                   name="categoriaRicetta"
                   type="radio"
                   value="antipasti"
-                  checked={selectedCategory === 'antipasti'} 
-                  onChange={(e) => setSelectedCategory(e.target.value)} 
+                  checked={selectedCategory === "antipasti"}
+                  onChange={(e) => setSelectedCategory(e.target.value)}
                 />
                 <Form.Check
                   inline
@@ -160,8 +158,8 @@ export default function FormAddRicetta() {
                   name="categoriaRicetta"
                   type="radio"
                   value="primi"
-                  checked={selectedCategory === 'primi'} 
-                  onChange={(e) => setSelectedCategory(e.target.value)} 
+                  checked={selectedCategory === "primi"}
+                  onChange={(e) => setSelectedCategory(e.target.value)}
                 />
                 <Form.Check
                   inline
@@ -169,8 +167,8 @@ export default function FormAddRicetta() {
                   name="categoriaRicetta"
                   type="radio"
                   value="secondi"
-                  checked={selectedCategory === 'secondi'} 
-                  onChange={(e) => setSelectedCategory(e.target.value)} 
+                  checked={selectedCategory === "secondi"}
+                  onChange={(e) => setSelectedCategory(e.target.value)}
                 />
                 <Form.Check
                   inline
@@ -178,8 +176,8 @@ export default function FormAddRicetta() {
                   name="categoriaRicetta"
                   type="radio"
                   value="contorni"
-                  checked={selectedCategory === 'contorni'} 
-                  onChange={(e) => setSelectedCategory(e.target.value)} 
+                  checked={selectedCategory === "contorni"}
+                  onChange={(e) => setSelectedCategory(e.target.value)}
                 />
                 <Form.Check
                   inline
@@ -187,8 +185,8 @@ export default function FormAddRicetta() {
                   name="categoriaRicetta"
                   type="radio"
                   value="dolci"
-                  checked={selectedCategory === 'dolci'} 
-                  onChange={(e) => setSelectedCategory(e.target.value)} 
+                  checked={selectedCategory === "dolci"}
+                  onChange={(e) => setSelectedCategory(e.target.value)}
                 />
               </div>
             </Form.Group>
@@ -256,9 +254,9 @@ export default function FormAddRicetta() {
               <ul
                 className="mt-2 list-unstyled"
                 style={{
-                  maxHeight: '150px',
-                  overflowY: 'auto',
-                  paddingRight: '10px',
+                  maxHeight: "150px",
+                  overflowY: "auto",
+                  paddingRight: "10px",
                 }}
               >
                 {steps.map((step, index) => (
@@ -268,18 +266,24 @@ export default function FormAddRicetta() {
                       size="sm"
                       onClick={() => handleRemoveStep(index)}
                       aria-label={`Rimuovi passaggio: ${step}`}
-                      className="text-danger p-0 me-2"  
+                      className="text-danger p-0 me-2"
                     >
                       <strong className="fs-4">×</strong>
                     </Button>
-                    <span>{step}</span>  
+                    <span>{step}</span>
                   </li>
                 ))}
               </ul>
             </Form.Group>
 
             <div className="d-flex justify-content-center mt-5">
-              <Button variant="secondary" type="button" className="me-3" onClick={handleShow} aria-label="Azzera form">
+              <Button
+                variant="secondary"
+                type="button"
+                className="me-3"
+                onClick={handleShow}
+                aria-label="Azzera form"
+              >
                 Azzera
               </Button>
 
@@ -287,7 +291,9 @@ export default function FormAddRicetta() {
                 <Modal.Header closeButton>
                   <Modal.Title>Azzerare il form</Modal.Title>
                 </Modal.Header>
-                <Modal.Body>Procedere con la cancellazione dei dati inseriti?</Modal.Body>
+                <Modal.Body>
+                  Procedere con la cancellazione dei dati inseriti?
+                </Modal.Body>
                 <Modal.Footer>
                   <Button variant="secondary" onClick={handleClose}>
                     Annulla
@@ -300,7 +306,7 @@ export default function FormAddRicetta() {
 
               <Button
                 variant="primary"
-                type="button"  
+                type="button"
                 aria-label="Salva ricetta"
                 onClick={handleSave}
               >
