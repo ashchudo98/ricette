@@ -2,9 +2,9 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-import NavDropdown from "react-bootstrap/NavDropdown";
-import Link from "next/link";
 import Logo from "../atoms/Logo";
+import LinkNav from "../atoms/LinkNav";
+import LinkNavDropdown from "../atoms/LinkNavDropdown";
 
 export default function NavBar() {
   return (
@@ -14,29 +14,25 @@ export default function NavBar() {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link as={Link} href="/">
-              Home
-            </Nav.Link>
-            <NavDropdown title="Ricette" id="basic-nav-dropdown">
-              <NavDropdown.Item as={Link} href="/categorie/antipasti">
-                Antipasti
-              </NavDropdown.Item>
-              <NavDropdown.Item as={Link} href="/categorie/primi">
-                Primi
-              </NavDropdown.Item>
-              <NavDropdown.Item as={Link} href="/categorie/secondi">
-                Secondi
-              </NavDropdown.Item>
-              <NavDropdown.Item as={Link} href="/categorie/contorni">
-                Contorni
-              </NavDropdown.Item>
-              <NavDropdown.Item as={Link} href="/categorie/dolci">
-                Dolci
-              </NavDropdown.Item>
-            </NavDropdown>
-            <Nav.Link as={Link} href="/categorie/aggiungiRicetta">
-              Aggiungi Ricetta
-            </Nav.Link>
+            <LinkNav href="/" path="Home" />
+            <LinkNavDropdown
+              title="Ricette"
+              id="menu-a-discesa-per-categorie-ricette"
+              index={5}
+              href={[
+                "/categorie/aggiungiRicetta",
+                "/categorie/antipasti",
+                "/categorie/primi",
+                "/categorie/secondi",
+                "/categorie/contorni",
+                "/categorie/dolci",
+              ]}
+              titles={["Antipasti", "Primi", "Secondi", "Contorni", "Dolci"]}
+            />
+            <LinkNav
+              href="/categorie/aggiungiRicetta"
+              path="Aggiungi Ricetta"
+            />
           </Nav>
         </Navbar.Collapse>
       </Container>
