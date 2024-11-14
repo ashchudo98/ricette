@@ -15,12 +15,12 @@ export default function NavBar() {
           <Nav className="me-auto">
             <Nav.Link as={Link} href="/">Home</Nav.Link>
             <NavDropdown title="Ricette" id="basic-nav-dropdown">
-              <NavDropdown.Item as={Link} href="/categorie/Antipasti">Antipasti</NavDropdown.Item>
-              <NavDropdown.Item as={Link} href="/categorie/Primi">Primi</NavDropdown.Item>
-              <NavDropdown.Item as={Link} href="/categorie/Secondi">Secondi</NavDropdown.Item>
-              <NavDropdown.Item as={Link} href="/categorie/Contorni">Contorni</NavDropdown.Item>
-              <NavDropdown.Item as={Link} href="/categorie/Dolci">Dolci</NavDropdown.Item></NavDropdown>
-            <Nav.Link as={Link} href="/categorie/Aggiungi Ricetta">Aggiungi Ricetta</Nav.Link>
+              <NavDropdown.Item as={Link} href="/categorie/antipasti">Antipasti</NavDropdown.Item>
+              <NavDropdown.Item as={Link} href="/categorie/primi">Primi</NavDropdown.Item>
+              <NavDropdown.Item as={Link} href="/categorie/secondi">Secondi</NavDropdown.Item>
+              <NavDropdown.Item as={Link} href="/categorie/contorni">Contorni</NavDropdown.Item>
+              <NavDropdown.Item as={Link} href="/categorie/dolci">Dolci</NavDropdown.Item></NavDropdown>
+            <Nav.Link as={Link} href="/categorie/aggiungiRicetta">Aggiungi Ricetta</Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>
