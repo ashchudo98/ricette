@@ -1,6 +1,5 @@
 import { NavDropdown } from "react-bootstrap";
 import Link from "next/link";
-import "bootstrap/dist/css/bootstrap.min.css";
 
 export default function LinkNavDropdown(props) {
   const dropDownItems = props.titles.map((_, i) => (

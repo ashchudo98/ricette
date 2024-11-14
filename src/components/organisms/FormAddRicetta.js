@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Form, Card, Button, Modal } from "react-bootstrap";
 import { db } from "@/firebase";
 import { collection, addDoc } from "firebase/firestore";
+import FormTextInput from "../atoms/FormTextInput";
 
 export default function FormAddRicetta() {
   const [recipeName, setRecipeName] = useState("");
@@ -83,16 +84,16 @@ export default function FormAddRicetta() {
         <Card.Body>
           <Form>
             {/* Nome ricetta */}
-            <Form.Group className="mb-3" controlId="nomeRicetta">
-              <Form.Label>Nome ricetta:</Form.Label>
-              <Form.Control
-                type="text"
-                aria-label="Nome della ricetta"
-                value={recipeName}
-                onChange={(e) => setRecipeName(e.target.value)}
-              />
-            </Form.Group>
-
+            <FormTextInput
+              className="mb-3"
+              controlId="nomeRicetta"
+              label="Nome Ricetta:"
+              type="text"
+              ariaLabel="Nome della ricetta"
+              recipeName={recipeName}
+              handleOnChange={(e) => setRecipeName(e.target.value)}
+            />
+            
             {/* Tempo preparazione */}
             <Form.Group className="mb-3" controlId="tempoPreparazione">
               <Form.Label>Tempo di preparazione:</Form.Label>
