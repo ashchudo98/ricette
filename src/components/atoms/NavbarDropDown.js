@@ -3,13 +3,9 @@ import Link from "next/link";
 
 export default function NavbarDropdown({ label, fields }) {
   return (
-    <NavDropdown title={label} id={label}>
+    <NavDropdown title={label}>
       {fields.map((field, index) => (
-        <NavDropdown.Item
-          as={Link}
-          href={`#${field}`}
-          key={index}
-        >
+        <NavDropdown.Item as={Link} href={`/categorie/${field.toLowerCase()}`} key={index}>
           {field}
         </NavDropdown.Item>
       ))}

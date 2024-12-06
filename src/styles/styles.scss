@@ -1,0 +1,26 @@
+$primary-color : rgba(190, 150, 17, 0.644);
+
+body {
+    margin: 0;
+}
+
+.navbar {
+    display: flex;
+    align-items: center;
+    padding: 1rem !important;
+    background-color: $primary-color;
+    
+    .logo {
+        margin-left: 1rem;
+    }
+    .navbar-fields {
+            gap: 1rem;
+        }
+    
+}
+
+.searchbar {
+    display: flex;
+    height: auto;
+    gap: 0.5rem;
+}
