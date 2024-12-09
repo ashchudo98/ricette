@@ -23,7 +23,7 @@ export default function NavBar() {
             label="Categorie"
             fields={["Antipasti", "Primi", "Secondi", "Contorni", "Dolci"]}
           />
-          <NavField href="/addRecipee" label="Aggiungi Ricetta" />
+          <NavField href="/categorie/addRecipee" label="Aggiungi Ricetta" />
           <SearchBar className='searchbar'/>
         </Nav>
       </Navbar.Collapse>

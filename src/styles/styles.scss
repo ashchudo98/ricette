@@ -1,26 +1,86 @@
-$primary-color : rgba(190, 150, 17, 0.644);
+$primary-color: rgba(190, 150, 17, 0.644);
+$secondary-color: rgba(247, 221, 137, 0.644);
 
 body {
-    margin: 0;
+  margin: 0;
 }
 
 .navbar {
-    display: flex;
-    align-items: center;
-    padding: 1rem !important;
-    background-color: $primary-color;
-    
-    .logo {
-        margin-left: 1rem;
-    }
-    .navbar-fields {
-            gap: 1rem;
-        }
-    
+  display: flex;
+  align-items: center;
+  padding: 1rem !important;
+  background-color: $primary-color;
+
+  .logo {
+    margin-left: 1rem;
+  }
+  .navbar-fields {
+    gap: 1rem;
+  }
 }
 
 .searchbar {
+  display: flex;
+  height: auto;
+  gap: 0.5rem;
+}
+
+.form {
+  background-color: $secondary-color !important;
+  margin-top: 3rem;
+  padding: 3rem;
+  .form-element {
+    margin-left: 3rem;
+    margin-right: 3rem;
+    margin-bottom: 1rem;
+  }
+  .buttons {
+    margin-top: 3rem;
     display: flex;
-    height: auto;
-    gap: 0.5rem;
+    justify-content: center;
+    gap: 2rem;
+  }
+  .recipee-name {
+    width: 25rem;
+  }
+  .categorie {
+    display: flex;
+    gap: 1rem;
+  }
+  .preparation-time-unit {
+    .preparation-time-elements {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      .preparation-time {
+        width: 6rem;
+      }
+      .time-unit {
+        display: flex;
+        gap: 1rem;
+      }
+    }
+  }
+  .ingredient-elements {
+    display: flex;
+    gap: 1rem;
+    align-items: end;
+    .ingredient {
+      width: 20rem;
+    }
+    .button-ingredient {
+      height: 2.25rem;
+    }
+  }
+  .steps-elements {
+    display: flex;
+    gap: 1rem;
+    align-items: end;
+    .steps {
+      width: 100%;
+    }
+    .button-steps {
+      height: 2.25rem;
+    }
+  }
 }

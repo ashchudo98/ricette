@@ -1,4 +1,6 @@
 import { useRouter } from "next/router";
+import NavBar from "@/components/organisms/NavBar";
+import AddRicette from "@/components/organisms/AddRicette";
 
 export default function Categorie() {
   const router = useRouter();
@@ -13,6 +15,13 @@ export default function Categorie() {
       return <h1>Contorni</h1>;
     case "dolci":
       return <h1>Dolci</h1>;
+    case "addRecipee":
+      return (
+        <div>
+          <NavBar />
+          <AddRicette />
+        </div>
+      );
     default:
       return <h1>Categoria non trovata</h1>;
   }
