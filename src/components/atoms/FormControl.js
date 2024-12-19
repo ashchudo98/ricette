@@ -1,6 +1,6 @@
 import { Form } from "react-bootstrap";
 
-export default function FormControl({ type, className, min, rows, as }) {
+export default function FormControl({ type, className, min, rows, as, value, onChange }) {
   return (
     <div className={className}>
       <Form.Control
@@ -9,9 +9,11 @@ export default function FormControl({ type, className, min, rows, as }) {
         rows={rows}
         type={type}
         min={min}
-      ></Form.Control>
+        value={value}
+        onChange={onChange}
+      />
       <Form.Control.Feedback type="invalid">
-        Campo obbigatorio!
+        Campo obbligatorio!
       </Form.Control.Feedback>
     </div>
   );
