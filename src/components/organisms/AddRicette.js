@@ -11,7 +11,15 @@ export default function AddRicette() {
 
   useEffect(() => {
     handleDisabled();
-  }, [state]);
+  }, [
+    state.recipeName,
+    state.preparationTime,
+    state.timeUnit,
+    state.description,
+    state.categories,
+    state.ingredients,
+    state.steps,
+  ]);
 
   /* const handleValidation = (event) => {
     const form = event.currentTarget;
