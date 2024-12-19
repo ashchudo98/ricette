@@ -1,11 +1,17 @@
 import { Form, Button, Container, Card } from "react-bootstrap";
 import FormRadio from "../atoms/FormRadio";
 import FormControl from "../atoms/FormControl";
-import React, { useReducer } from "react";
+import React, { useReducer, useEffect } from "react";
 import { reducer, actionTypes, initialState } from "@/reducers/formReducer";
+import { db } from "@/firebase";
+import { collection, addDoc } from "firebase/firestore";
 
 export default function AddRicette() {
   const [state, dispatch] = useReducer(reducer, initialState);
+
+  useEffect(() => {
+    handleDisabled();
+  }, [state]);
 
   /* const handleValidation = (event) => {
     const form = event.currentTarget;
@@ -29,6 +35,12 @@ export default function AddRicette() {
     }
   };
 
+  const removeIngredient = (index) => {
+    const ingredients = [...state.ingredients];
+    ingredients.splice(index, 1);
+    dispatch({ type: actionTypes.SET_INGREDIENTS, payload: ingredients });
+  };
+
   const addStep = () => {
     if (state.newStep.trim() !== "") {
       dispatch({
@@ -39,7 +51,51 @@ export default function AddRicette() {
     }
   };
 
+  const removeStep = (index) => {
+    const steps = [...state.steps];
+    steps.splice(index, 1);
+    dispatch({ type: actionTypes.SET_STEPS, payload: steps });
+  };
+
   const reset = () => dispatch({ type: actionTypes.RESET_STATE });
+
+  const handleSave = async () => {
+    const ricetta = {
+      nome: state.recipeName,
+      tempoPreparazione: state.preparationTime,
+      unitaTempo: state.timeUnit,
+      descrizione: state.description,
+      categoria: state.categories,
+      ingredienti: state.ingredients,
+      preparazione: state.steps,
+      createdAt: new Date(),
+    };
+
+    try {
+      const docRef = await addDoc(collection(db, "ricette"), ricetta);
+      console.log("Ricetta aggiunta con ID: ", docRef.id);
+      alert("Ricetta salvata con successo!");
+      reset();
+    } catch (error) {
+      alert("Si è verificato un errore durante il salvataggio della ricetta.");
+    }
+  };
+
+  const handleDisabled = () => {
+    if (
+      state.recipeName === "" ||
+      state.preparationTime === "" ||
+      state.timeUnit === "" ||
+      state.description === "" ||
+      state.categories.length === 0 ||
+      state.ingredients.length === 0 ||
+      state.steps.length === 0
+    ) {
+      dispatch({ type: actionTypes.SET_DISABLED, payload: true });
+    } else {
+      dispatch({ type: actionTypes.SET_DISABLED, payload: false });
+    }
+  };
 
   return (
     <Card as={Container} className="form">
@@ -156,14 +212,23 @@ export default function AddRicette() {
               Aggiungi
             </Button>
           </div>
+
+          <div className="form-field ingredients-list">
+            <ul className="list">
+              {state.ingredients.map((ingredient, index) => (
+                <div
+                  key={(ingredient, index)}
+                  style={{ display: "flex", gap: "1.5rem" }}
+                >
+                  <span className="remove" onClick={removeIngredient}>
+                    X
+                  </span>
+                  <li key={index}>{ingredient} </li>
+                </div>
+              ))}
+            </ul>
+          </div>
         </Form.Group>
-        <div className="form-field ingredients-list">
-          <ul>
-            {state.ingredients.map((ingredient, index) => (
-              <li key={index}>{ingredient}</li>
-            ))}
-          </ul>
-        </div>
         <hr />
 
         <Form.Group className="form-element">
@@ -187,9 +252,17 @@ export default function AddRicette() {
             </Button>
           </div>
           <div className="form-field steps-list">
-            <ul>
+            <ul className="list">
               {state.steps.map((step, index) => (
-                <li key={index}>{step}</li>
+                <div
+                  key={(step, index)}
+                  style={{ display: "flex", gap: "1.5rem" }}
+                >
+                  <span className="remove" onClick={removeStep}>
+                    X
+                  </span>
+                  <li key={index}>{step} </li>
+                </div>
               ))}
             </ul>
           </div>
@@ -200,7 +273,13 @@ export default function AddRicette() {
           <Button variant="secondary" onClick={reset}>
             Azzera
           </Button>
-          <Button /* type="submit" */ className="btn-save">Salva</Button>
+          <Button
+            /* type="submit" */ onClick={handleSave}
+            className="btn-save"
+            disabled={state.disabled}
+          >
+            Salva
+          </Button>
         </Form.Group>
       </Form>
     </Card>

@@ -11,6 +11,7 @@ export default function FormControl({ type, className, min, rows, as, value, onC
         min={min}
         value={value}
         onChange={onChange}
+        style={{ backgroundColor: "rgba(241, 235, 216, 0.932)" }}
       />
       <Form.Control.Feedback type="invalid">
         Campo obbligatorio!

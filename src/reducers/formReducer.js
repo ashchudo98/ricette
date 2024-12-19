@@ -9,6 +9,7 @@ export const initialState = {
   steps: [],
   newStep: "",
   validated: false,
+  disabled: true,
 };
 
 export const actionTypes = {
@@ -23,6 +24,7 @@ export const actionTypes = {
   SET_NEW_STEP: "SET_NEW_STEP",
   SET_VALIDATED: "SET_VALIDATED",
   RESET_STATE: "RESET_STATE",
+  SET_DISABLED: "SET_DISABLED",
 };
 
 export function reducer(state, action) {
@@ -56,6 +58,8 @@ export function reducer(state, action) {
       return { ...state, validated: action.payload };
     case actionTypes.RESET_STATE:
       return initialState;
+    case actionTypes.SET_DISABLED:
+      return { ...state, disabled: action.payload };
     default:
       return state;
   }

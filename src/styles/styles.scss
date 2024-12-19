@@ -109,10 +109,22 @@ body {
 }
 
 .ingredients-list{
-  margin-left: 3rem !important;
-  margin-right: 3rem !important;
+  margin-top: 1rem;
 }
 
 .steps-list{
   margin-top: 1rem;
+}
+
+.remove {
+  color: red;
+  font-weight: bold;
+}
+
+.remove:hover {
+  cursor: pointer;
+}
+
+.list {
+  list-style-type: none;
 }
