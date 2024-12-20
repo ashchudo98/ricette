@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export default function NavbarDropdown({ label, fields }) {
   return (
-    <NavDropdown title={label} style={{ backgroundColor: "rgba(241, 235, 216, 0.932)" }}>
+    <NavDropdown title={label}>
       {fields.map((field, index) => (
         <NavDropdown.Item
           style={{ backgroundColor: "rgba(241, 235, 216, 0.932)" }}
