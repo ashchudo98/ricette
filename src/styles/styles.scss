@@ -110,11 +110,11 @@ body {
   background-color: $tertiary-color !important;
 }
 
-.ingredients-list{
+.ingredients-list {
   margin-top: 1rem;
 }
 
-.steps-list{
+.steps-list {
   margin-top: 1rem;
 }
 
@@ -129,4 +129,36 @@ body {
 
 .list {
   list-style-type: none;
+}
+
+.recipe-body {
+  display: flex;
+  flex-direction: column;
+  padding: 3rem;
+  .card {
+    width: 50rem;
+    background-color: $primary-color;
+    .recipeName, .recipeDescription {
+      background-color: $tertiary-color;
+      padding: 0.5rem;
+      width: fit-content;
+    }
+    .recipeTime {
+      background-color: $tertiary-color;
+      width: fit-content;
+      border-radius: 1rem;
+      padding: 0.2rem;
+    }
+  }
+  .prova {
+    display: flex;
+    align-items: center !important;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    .recipeImage {
+      width: 20rem;
+      height: auto;
+      border-radius: 3rem !important;
+    }
+  }
 }
