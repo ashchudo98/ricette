@@ -1,12 +1,9 @@
-import { useEffect } from "react";
 import { useRouter } from "next/router";
 import NavBar from "@/components/organisms/NavBar";
 import AddRicette from "@/components/organisms/AddRicette";
 import { collection, getDocs, query, where } from "firebase/firestore";
 import { db } from "@/firebase";
-import { Card, Container, Row } from "react-bootstrap";
-import Link from "next/link";
-import Image from "next/image";
+import CardCustom from "@/components/organisms/CardCustom";
 
 const fetchData = async (params) => {
   const q = query(
@@ -52,40 +49,18 @@ export default function Page({ data }) {
         {ricette.length === 0 ? (
           <p>Nessuna ricetta trovata.</p>
         ) : (
-          <>
-            {ricette.map((ricetta) => (
-              <Container
-                key={ricetta.id}
-                style={{ display: "flex", alignItems: "center", gap: "1rem" }}
-                className="prova"
-              >
-                <Card className="card" key={ricetta.id}>
-                  <Card.Body
-                    as={Link}
-                    href={`/ricette/${ricetta.nome}`}
-                    style={{ textDecoration: "none" }}
-                  >
-                    <Card.Title as={Card} className="recipeName">
-                      <h5>{ricetta.nome}</h5>
-                    </Card.Title>
-                    <Card.Subtitle as={Card} className="recipeTime mb-2">
-                      {ricetta.tempoPreparazione} {ricetta.unitaTempo}
-                    </Card.Subtitle>
-                    <Card.Text as={Card} className="recipeDescription">
-                      {ricetta.descrizione}
-                    </Card.Text>
-                  </Card.Body>
-                </Card>
-                <Image
-                  src={`/images/${ricetta.nome}.png`}
-                  className="recipeImage"
-                  width={200}
-                  height={20}
-                  alt={ricetta.nome}
-                />
-              </Container>
-            ))}
-          </>
+          ricette.map((ricetta) => (
+            <CardCustom
+              className="prova"
+              key={ricetta.id}
+              title={ricetta.nome}
+              sub={`${ricetta.tempoPreparazione} ${ricetta.unitaTempo}`}
+              text={ricetta.descrizione}
+              href={`/ricette/${ricetta.nome}`}
+              src={`/images/${ricetta.nome}.png`}
+              alt={ricetta.nome}
+            />
+          ))
         )}
       </div>
     </>

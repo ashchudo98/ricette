@@ -137,14 +137,14 @@ body {
   padding: 3rem;
   .card {
     width: 50rem;
-    background-color: $primary-color;
+    background-color: $secondary-color !important;
     .recipeName, .recipeDescription {
-      background-color: $tertiary-color;
+      background-color: $tertiary-color!important;
       padding: 0.5rem;
       width: fit-content;
     }
     .recipeTime {
-      background-color: $tertiary-color;
+      background-color: $tertiary-color !important;
       width: fit-content;
       border-radius: 1rem;
       padding: 0.2rem;
@@ -155,6 +155,7 @@ body {
     align-items: center !important;
     margin-top: 1rem;
     margin-bottom: 1rem;
+    gap: 1rem;
     .recipeImage {
       width: 20rem;
       height: auto;
